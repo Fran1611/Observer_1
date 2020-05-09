@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace Observer
 {
-    public class TemperatureSensor : IObserver
+    public class TemperatureSensor : IObservable
     {
-        //private List<TemperatureReporter> observers = new List<TemperatureReporter>();
+        List<IObserver> observers = new List<IObserver>();
 
-        public List<IObserver> Observers{get;}
-        private List<IObserver> observers;
         public Temperature Current { get; private set; }
 
         public void Subscribe(IObserver observer)
@@ -26,11 +24,6 @@ namespace Observer
             {
                 this.observers.Remove(observer);
             }
-        }
-
-        public void Update()
-        {
-            
         }
 
         public void GetTemperature()
@@ -51,7 +44,7 @@ namespace Observer
                         this.Current = new Temperature(temp.Value, DateTime.Now);
                         foreach (var observer in observers)
                         {
-                            observer.Update();
+                            observer.Update(this.Current);
                         }
                         previous = temp;
                         if (start)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Observer
 {
@@ -7,7 +8,7 @@ namespace Observer
         private decimal degrees;
 
         private DateTime date;
-
+    
         public Temperature(decimal temperature, DateTime dateAndTime)
         {
             this.degrees = temperature;
